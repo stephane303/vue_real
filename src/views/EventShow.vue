@@ -21,21 +21,16 @@
       </div>
     </template>
 <script>
-import EventService from '@/services/EventService.js';
+import {mapState} from 'vuex'
 export default {
   props: ['id'],
-  data () {
-    return {
-      event: {}
-    }
-  },
+  computed : mapState(['event']),
   created () {
-    EventService.getEvent( this.id)
-    .then( response => {
-      this.event = response.data;
-      console.log(response.data)})
+    this.$store.dispatch('fetchEvent', this.id)
   }
+
 }
+
 </script>
 
     <style scoped>
