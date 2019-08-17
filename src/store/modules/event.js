@@ -75,6 +75,7 @@ export const  mutations= {
           message: 'There was a problem fetching events: '+ error.message
         };
         dispatch('notification/add', notification, {root:true});
+        throw error
       })      
     }      
   };

@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import EventList from './views/EventList.vue'
 import EventCreate from './views/EventCreate.vue'
 import EventShow from './views/EventShow.vue'
+import NotFound from './components/NotFound'
+import NetworkError from './components/NetworkError'
 import NProgress from 'nprogress'
 import store from '@/store/store'
 
@@ -36,7 +38,34 @@ const router = new Router({
           routeTo.params.event = event;
           next()
         })
+        .catch( (error) => {
+          //console.log('catch ?'+ error.response.status)
+          console.dir(error)
+          if (error.response && error.response.status == 404){
+            next({name :'404', params : { resource : 'event'}});
+          } else {
+            next({name:'NetworkError'})
+          }
+        })
+          //error => this.redirect('404'))
       }
+    },
+    {
+      path:'/404',
+      name:'404',
+      component: NotFound,
+      props: true
+
+    },
+    {
+      path:'/NetworkError',
+      name:'NetworkError',
+      component: NetworkError
+    },
+    {
+      path:'*',
+      redirect:{name : '404', params: {resource : 'page'}}
+
     }
 
   ]
