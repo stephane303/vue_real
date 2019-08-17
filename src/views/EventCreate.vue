@@ -2,10 +2,7 @@
   <div>
     <h1>Create an Event</h1>
     <form @submit.prevent="createEvent">
-      <label>Select a category</label>
-      <select v-model="event.category">
-        <option v-for="cat in categories" :key="cat">{{ cat }}</option>
-      </select>
+      <BaseSelect label="Select a category" :options="categories" v-model="event.category"/>
       <h3>Name & describe your event</h3>
       <BaseInput  class="field" placeholder="Title" type="text" label='Title' v-model="event.title"/>      
       <BaseInput class="field" placeholder="Add a description" type="text" label="Description" v-model="event.description" />
@@ -16,12 +13,7 @@
         <label>Date</label>
         <datepicker v-model="event.date" placeholder="Select a date" />
       </div>
-      <div class="field">
-        <label>Select a time</label>
-        <select v-model="event.time">
-          <option v-for="time in times" :key="time">{{ time }}</option>
-        </select>
-      </div>
+      <BaseSelect class="field" label="Select a time" :options="times"  v-model="event.time"/>
       <input type="submit" class="button -fill-gradient" value="Submit" />
     </form>
   </div>
@@ -64,7 +56,7 @@
           const id = Math.floor(Math.random()* 10000000)
           return {
             id: id,
-            category: '',
+            category: 'food',
             organizer: user.name,
             title: '',
             description: '',
