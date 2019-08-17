@@ -7,19 +7,10 @@
         <option v-for="cat in categories" :key="cat">{{ cat }}</option>
       </select>
       <h3>Name & describe your event</h3>
-      <div class="field">
-        <label>Title</label>
-        <input v-model="event.title" type="text" placeholder="Add an event title" />
-      </div>
-      <div class="field">
-        <label>Description</label>
-        <input v-model="event.description" type="text" placeholder="Add a description" />
-      </div>
+      <BaseInput  class="field" placeholder="Title" type="text" label='Title' v-model="event.title"/>      
+      <BaseInput class="field" placeholder="Add a description" type="text" label="Description" v-model="event.description" />
       <h3>Where is your event?</h3>
-      <div class="field">
-        <label>Location</label>
-        <input v-model="event.location" type="text" placeholder="Add a location" />
-      </div>
+      <BaseInput label="Location" v-model="event.location" type="text" placeholder="Add a location" />
       <h3>When is your event?</h3>
       <div class="field">
         <label>Date</label>
@@ -67,7 +58,6 @@
             NProgress.done();
             console.log('Erreur de création')
           })
-
         },
         createFreshEvent() {
           const user = this.$store.state.user.user
