@@ -21,18 +21,14 @@
       </div>
     </template>
 <script>
-import {mapState, mapActions} from 'vuex'
-export default {
-  props: ['id'],
-  computed : mapState({
-    event : state => state.event.event
-  }),
-  created () {
-    this.fetchEvent(this.id)
-  },
-  methods : mapActions('event', ['fetchEvent'])
-}
 
+
+
+export default {
+  props: {
+    event : Object
+  }
+}
 </script>
 
     <style scoped>

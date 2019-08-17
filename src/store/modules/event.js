@@ -4,7 +4,8 @@ export const namespaced = true
 export const   state = {
     events : [],
     totalEvents: 0,
-    event:{}
+    event:{},
+    perPage : 2 
   };
 
 export const  mutations= {
@@ -40,8 +41,8 @@ export const  mutations= {
       })
 
     },
-    fetchEvents({commit, dispatch}, {perPage, page}){
-      EventService.getEvents(perPage, page)
+    fetchEvents({commit, dispatch, state}, page ){
+      return EventService.getEvents(state.perPage, page)
       .then(response => {
         console.log(response.headers['x-total-count']);
         console.log(response.data);
@@ -60,12 +61,13 @@ export const  mutations= {
 
       })      
     },
-    fetchEvent({commit} ,id ){
+    fetchEvent({commit,dispatch} ,id ){
       console.log('fetch event id '+ id);
-      EventService.getEvent( id)
+      return EventService.getEvent( id)
       .then( response => {
         commit('SET_EVENT',response.data);
         console.log(response.data);
+        return response.data
       })
       .catch(error => {
         const notification = {
