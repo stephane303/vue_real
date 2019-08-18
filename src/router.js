@@ -7,7 +7,7 @@ import NotFound from './components/NotFound'
 import NetworkError from './components/NetworkError'
 import NProgress from 'nprogress'
 import store from '@/store/store'
-
+import Example from './views/Example'
 
 Vue.use(Router)
 
@@ -22,6 +22,10 @@ const router = new Router({
       name: 'event-list',
       component: EventList,
       props:true
+    },
+    {
+      path: '/example',
+      component:Example
     },
     {
       path: '/event/create',

@@ -1,7 +1,7 @@
 <template>
   <div>
       <label>{{label}}</label>
-      <select :value="value" @input="selectValue">
+      <select :value="value" @input="selectValue" v-on="listeners">
         <option v-for="option in options" 
         :key="option"
          >{{ option }}</option>
@@ -21,6 +21,14 @@ export default {
       required: true
     },
     value : String
+  },
+  computed: {
+    listeners(){
+      return {
+        ...this.$listeners,
+        input: this.selectValue
+      }
+    }
   },
   methods :{
     selectValue(event){
