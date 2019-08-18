@@ -14,8 +14,8 @@
         <datepicker v-model="event.date" placeholder="Select a date" />
       </div>
       <BaseSelect class="field" label="Select a time" :options="times"  v-model="event.time"/>
-      <input type="submit" class="button -fill-gradient" value="Submit" />
-    </form>
+      <BaseButton type="submit" classButton="-fill-gradient">Submit</BaseButton>
+     </form>
   </div>
 </template>
 
@@ -56,7 +56,7 @@
           const id = Math.floor(Math.random()* 10000000)
           return {
             id: id,
-            category: 'food',
+            category: '',
             organizer: user.name,
             title: '',
             description: '',
